@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $('#title').autocomplete({
-        source: async function (request,response) {
+        source: async function(request,response) {
             let data = await fetch(`http://localhost:8000/search?query=${request.term}`)
                 .then(results => results.json())
-                .then(results = results.map(result => {
+                .then(results => results.map(result => {
                     return {
                         label: result.title,
                         value: result.title,
@@ -14,7 +14,7 @@ $(document).ready(function () {
         },
         minLength: 2,
         select: function(event, ui) {
-            console.log(ul.item.id)
+            console.log(ui.item.id)
             fetch(`http://localhost:8000/get/${ui.item.id}`)
                 .then(result => result.json())
                 .then(result => {

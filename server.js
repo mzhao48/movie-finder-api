@@ -21,13 +21,13 @@ MongoClient.connect(dbConnectionStr)
 //Middleware setup (message/communications between )
 app.use(express.urlencoded({extended : true}))
 app.use(express.json())
-app.use(cors)
+app.use(cors())
 
 app.get('/search', async (request,response) => {
     try {
         let result = await collection.aggregate([
             {
-                '$Search' : {
+                '$search' : {
                     'autocomplete' : {
                         'query' : `${request.query.query}`,
                         'path' : 'title',
